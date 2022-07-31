@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('register.store') }}" method="post">
+                    <form action="{{ route('register') }}" method="post">
                         @csrf
                         <div class="row form-group mb-3">
                             <label for="email" class="col-3 col-sm-2 form-label">{{ __('auth.email') }}</label>

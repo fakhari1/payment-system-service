@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ route('login') }}" method="post">
                         @csrf
                         <div class="row form-group mb-3">
                             <label for="email" class="col-3 col-sm-2 form-label">{{ __('auth.email') }}</label>
@@ -33,14 +33,21 @@
                                   text-align: center;
                                   display: flex;
                                   justify-content: space-between;">
-                               <div> <input type="checkbox" name="remember_me" class="form-check-input ml-4">
-                                   <label class="form-check-label ml-4">
-                                       {{ __('auth.remember_me') }}
-                                   </label></div>
+                                <div><input type="checkbox" name="remember_me" class="form-check-input ml-4">
+                                    <label class="form-check-label ml-4">
+                                        {{ __('auth.remember_me') }}
+                                    </label></div>
                                 <a href="{{ route('forget-password') }}">{{ __('auth.forget-password') }}؟</a>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-sm btn-success">{{ __('auth.login') }}</button>
+
+                        <div style="margin-right: 13%">
+                            @include('partials.validation-errors')
+                        </div>
+
+                        <div style="margin-right: 17%">
+                            <button type="submit" class="btn btn-sm btn-success">{{ __('auth.login') }}</button>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -41,7 +41,7 @@ return [
     'distinct' => ':attribute دارای مقدار تکراری است.',
     'email' => ':attribute ایمیل آدرس معتبر نیست.',
     'ends_with' => ':attribute آخرین مقدار باید شامل این موارد باشد: :values',
-    'exists' => ':attribute مورد انتخاب شده معتبر نیست.',
+    'exists' => 'این :attribute در سیستم ثبت نشده است.',
     'file' => ':attribute باید یک فایل انتخاب شود.',
     'filled' => ':attribute باید یک مقدار وارد شود.',
     'gt' => [
