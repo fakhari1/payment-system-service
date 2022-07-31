@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -25,9 +24,8 @@ class LoginController extends Controller
     */
 
 //    use AuthenticatesUsers;
-
-    protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectToDashboard = RouteServiceProvider::DASHBOARD;
+    use ThrottlesLogins;
+    protected $maxAttempts = 3;
 
     public function __construct()
     {
@@ -41,6 +39,10 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request)
     {
+        if ($this->hasTooManyLoginAttempts($request)) {
+            return $this->sendLockoutResponse($request);
+        }
+
         // check user and password
         // login
         // redirect to dashboard
@@ -49,6 +51,7 @@ class LoginController extends Controller
             $this->sendSuccessResponse();
         };
 
+        $this->incrementLoginAttempts($request);
         return $this->sendLoginFailedResponse();
     }
 
@@ -65,15 +68,13 @@ class LoginController extends Controller
         );
     }
 
-    protected
-    function sendSuccessResponse()
+    protected function sendSuccessResponse()
     {
         session()->regenerate();
         return redirect()->intended(RouteServiceProvider::DASHBOARD);
     }
 
-    protected
-    function sendLoginFailedResponse()
+    protected function sendLoginFailedResponse()
     {
         return redirect()->back()->with(['error_msg' => 'گذرواژه متعلق به این ایمیل نیست؛ دوباره تلاش کنید.']);
     }
@@ -81,7 +82,14 @@ class LoginController extends Controller
     public function logout()
     {
         session()->invalidate();
+
         Auth::logout();
+
         return redirect('/');
+    }
+
+    protected function username()
+    {
+        return 'email';
     }
 }
