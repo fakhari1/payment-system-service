@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 require 'auth.php';
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    $url = URL::temporarySignedRoute('test', Carbon::now()->addMinutes(60), ['id' => 12]);
+    dd($url);
 });
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('verify', fn() => 'hi')->name('test');

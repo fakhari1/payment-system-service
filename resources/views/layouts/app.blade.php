@@ -22,7 +22,21 @@
 <body>
 <div id="app">
     @include('partials.navbar')
-    <main class="py-4">
+
+
+    <main class="py-4 text-center">
+        @if(session('mustVerifyEmail'))
+            <div class="alert alert-danger text-center text-lg w-auto d-inline-block mx-auto py-2 px-3"
+                 style="font-size: 18px;">
+                <a href="{{ route('user.email.verify') }}" onclick="event.preventDefault(); document.getElementById('verify-email-form').submit();">
+                    {{ __('messages.verifyEmail') }}
+                </a>
+                <form action="{{ route('user.email.verify') }}" method="post">
+                    @csrf
+                </form>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 </div>

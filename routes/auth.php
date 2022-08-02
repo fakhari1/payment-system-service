@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\VerificationController;
+
 
 Route::prefix('auth')->group(function () {
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register.form');
@@ -12,10 +13,9 @@ Route::prefix('auth')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-    Route::get('/forget-password', function () {
+    Route::post('/verify-email', [VerificationController::class, 'verify'])->name('user.email.verify');
 
-    })->name('forget-password');
-
+    Route::get('/forget-password', [VerificationController::class, 'verify'])->name('forget-password');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
