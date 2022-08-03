@@ -18,9 +18,9 @@ use Carbon\Carbon;
 require 'auth.php';
 
 Route::get('/', function () {
-//    return view('welcome');
-    $url = URL::temporarySignedRoute('test', Carbon::now()->addMinutes(60), ['id' => 12]);
-    dd($url);
+    return view('welcome');
+//    $url = URL::temporarySignedRoute('test', Carbon::now()->addMinutes(60), ['id' => 12]);
+//    dd($url);
 });
 
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
