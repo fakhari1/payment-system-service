@@ -46,6 +46,8 @@ class VerificationController extends Controller
         // verify
         $request->user()->markEmailAsVerified();
 
+        session()->forget('mustVerifyEmail');
+
         // redirect
         return redirect('/')->with(['success_msg' => 'ایمیل شما با موفقیت تایید شد.']);
     }
