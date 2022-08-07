@@ -37,7 +37,7 @@
                                     <label class="form-check-label ml-4">
                                         {{ __('auth.remember_me') }}
                                     </label></div>
-                                <a href="{{ route('forget-password') }}">{{ __('auth.forget-password') }}؟</a>
+                                <a href="{{ route('forget-password.form') }}">{{ __('auth.forget-password') }}؟</a>
                             </div>
                         </div>
 

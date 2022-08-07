@@ -23,7 +23,8 @@ return [
     'password_confirmation' => 'تکرار گذرواژه',
     'phone' => 'موبایل',
     'remember_me' => 'مرا به خاطر بسپار',
-    'forget-password' => 'فراموشی گذرواژه',
+    'forget password' => 'فراموشی گذرواژه',
     'logout' => 'خروج از حساب کاربری',
-
+    'reset password' => 'تغییر گذرواژه',
+    'send verify link' => 'ارسال لینک بازیابی'
 ];

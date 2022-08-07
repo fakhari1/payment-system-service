@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         return !is_null($this->email_verified_at);
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+
+    }
 }
