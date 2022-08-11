@@ -35,6 +35,11 @@ class ResetPassword extends Mailable
 
     protected function generateLink()
     {
-        return route('forget-password.form', ['token' => $this->token, 'email' => $this->user->email]);
+        return route('reset-password.form',
+            [
+                'token' => $this->token,
+                'email' => $this->user->email
+            ]
+        );
     }
 }

@@ -54,6 +54,6 @@ class VerificationController extends Controller
         session()->forget('mustVerifyEmail');
 
         // redirect
-        return redirect('/')->with(['success_msg' => 'ایمیل شما با موفقیت تایید شد.']);
+        return redirect('/dashboard')->with(['success_msg' => 'ایمیل شما با موفقیت تایید شد.']);
     }
 }

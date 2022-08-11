@@ -26,5 +26,5 @@ return [
     'forget password' => 'فراموشی گذرواژه',
     'logout' => 'خروج از حساب کاربری',
     'reset password' => 'تغییر گذرواژه',
-    'send verify link' => 'ارسال لینک بازیابی'
+    'send verify link' => 'ارسال لینک بازیابی',
 ];

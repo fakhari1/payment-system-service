@@ -10,8 +10,8 @@
     </div>
 @endif
 
-@if(session('warn_msg'))
+@if(session('warn_message'))
     <div class="alert alert-warning w-50 mx-auto d-block p-2">
-        {{ session('warn_msg') }}
+        {{ session('warn_message') }}
     </div>
 @endif
