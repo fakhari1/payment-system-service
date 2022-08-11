@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegistered;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Providers\RouteServiceProvider;
@@ -55,6 +56,8 @@ class RegisterController extends Controller
 
         // login
         auth()->login($user);
+
+        event(new UserRegistered($user));
 
         // redirect
         return redirect()->to(RouteServiceProvider::DASHBOARD);
