@@ -23,49 +23,59 @@
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
                 @guest
-                @if (Route::has('login'))
-                <li class="nav-item mr-2 ">
-                    <a class="btn btn-info text-white"
-                       href="{{ route('login.form') }}"
-                       style="margin-left: 10px">{{ __('auth.login') }}
-                    </a>
-                </li>
-                @endif
+                    @if (Route::has('login'))
+                        <li class="nav-item mr-2 ">
+                            <a class="btn btn-info text-white"
+                               href="{{ route('login.form') }}"
+                               style="margin-left: 10px">{{ __('auth.login') }}
+                            </a>
+                        </li>
+                    @endif
 
-                @if (Route::has('register'))
-                <li class="nav-item mr-2 ">
-                    <a class="btn btn-info text-white"
-                       href="{{ route('register.form') }}">
-                        {{ __('auth.register') }}
-                    </a>
-                </li>
-                @endif
+                    @if (Route::has('register'))
+                        <li class="nav-item mr-2 ">
+                            <a class="btn btn-info text-white"
+                               href="{{ route('register.form') }}">
+                                {{ __('auth.register') }}
+                            </a>
+                        </li>
+                    @endif
                 @else
-                <li class="nav-item dropdown mr-2 ">
-                    <a id="navbarDropdown"
-                       class="nav-link dropdown-toggle text-black-50"
-                       href="#" role="button"
-                       data-bs-toggle="dropdown"
-                       aria-haspopup="true"
-                       aria-expanded="false"
-                       v-pre>
-                        {{ Auth::user()->name }}
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-end"
-                         aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item"
-                           href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                            {{ __('auth.logout') }}
+                    <li class="nav-item mr-2">
+                        <a class="btn btn-info text-white"
+                           href="{{ route('cart.show') }}"
+                           style="margin-left: 10px">
+                            <i class="fa-light fa-cart-shopping"></i>
+                            {{ "سبد خرید" }}
+                            <span class="badge bg-light text-dark"
+                                  style="border-radius: 100%;width: 20px;height: 20px;text-align: center;padding: 0;line-height: 20px;">{{ $cart_count ?? '0' }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown mr-2 ">
+                        <a id="navbarDropdown"
+                           class="nav-link dropdown-toggle text-black-50"
+                           href="#" role="button"
+                           data-bs-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           v-pre>
+                            {{ Auth::user()->name }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </div>
-                </li>
+                        <div class="dropdown-menu dropdown-menu-end"
+                             aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+                                {{ __('auth.logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                 @endguest
             </ul>
         </div>

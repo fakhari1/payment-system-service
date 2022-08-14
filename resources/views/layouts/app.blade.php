@@ -24,12 +24,8 @@
     @include('partials.navbar')
 
 
-    <main class="py-4 text-center">
-        @if(session('success_msg'))
-            <div class="alert alert-success text-center text-lg w-50 d-inline-block mx-auto py-2 px-3" style="font-size: 18px">
-                {{ session('success_msg') }}
-            </div>
-        @endif
+    <main class="p-4 text-center">
+        @include('partials.alerts')
 
         @if(session('mustVerifyEmail'))
             <div class="alert alert-danger text-center text-lg w-auto d-inline-block mx-auto py-2 px-3"

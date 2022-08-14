@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Carbon\Carbon;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Support\Storage\Contracts\StorageInterface;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +19,38 @@ use Carbon\Carbon;
 |
 */
 
-require 'auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', function () {
     return view('welcome');
-//    $url = URL::temporarySignedRoute('test', Carbon::now()->addMinutes(60), ['id' => 12]);
-//    dd($url);
 });
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-Route::get('verify', fn() => 'hi')->name('test');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('home');
+    });
+
+    Route::get('cart/clear', function () {
+        resolve(StorageInterface::class)->clear();
+        return redirect()->route('products');
+    });
+
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('cart.show');
+        Route::get('increment/{product}', [CartController::class, 'increment'])->name('cart.increment');
+        Route::get('decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
+    });
+});
+
+
+Route::prefix('products')->group(function () {
+
+    Route::get('/', [ProductController::class, 'index'])->name('products');
+
+    Route::get('{product}', [ProductController::class, 'show'])->name('products.show');
+
+    Route::get('{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::patch('{product}/update', [ProductController::class, 'update'])->name('products.update');
+
+    Route::delete('{product}/delete', [ProductController::class, 'destroy'])->name('products.delete');
+});

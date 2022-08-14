@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -18,10 +19,42 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->safeEmail(),
+            'name' => fake()->randomElement([
+                'User 1',
+                'User 6',
+                'User 7',
+                'User 8',
+                'User 9',
+                'User 10',
+                'User 11',
+                'User 12',
+                'User 13',
+                'User 14',
+                'User 15',
+                'User 2',
+                'User 3',
+                'User 4',
+                'User 5'
+            ]),
+            'email' => fake()->randomElement([
+                'user-1@test.com',
+                'user-2@test.com',
+                'user-3@test.com',
+                'user-4@test.com',
+                'user-5@test.com',
+                'user-6@test.com',
+                'user-7@test.com',
+                'user-8@test.com',
+                'user-9@test.com',
+                'user-10@test.com',
+                'user-11@test.com',
+                'user-12@test.com',
+                'user-13@test.com',
+                'user-14@test.com',
+                'user-15@test.com',
+            ]),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
         ];
     }
