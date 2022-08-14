@@ -1,4 +1,4 @@
-<div class="col-md-6 mt-5">
+<div class="col-md-6 mt-5 text-center mx-auto">
 
     @if(session('success_msg'))
         <div class="alert alert-success">

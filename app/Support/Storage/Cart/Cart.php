@@ -64,5 +64,8 @@ class Cart
         return $this->storage->get($product->id);
     }
 
-    pbu
+    public function itemCount()
+    {
+        return $this->storage->count();
+    }
 }

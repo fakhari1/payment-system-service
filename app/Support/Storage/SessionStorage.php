@@ -26,7 +26,7 @@ class SessionStorage implements StorageInterface, Countable
 
     public function all()
     {
-        return session()->get($this->bucket);
+        return session()->get($this->bucket) ?? [];
     }
 
     public function exists($index)
@@ -46,7 +46,6 @@ class SessionStorage implements StorageInterface, Countable
 
     public function count()
     {
-        if (!is_null($this->all()))
-            return count($this->all());
+        return count($this->all());
     }
 }

@@ -48,7 +48,7 @@
                             <i class="fa-light fa-cart-shopping"></i>
                             {{ "سبد خرید" }}
                             <span class="badge bg-light text-dark"
-                                  style="border-radius: 100%;width: 20px;height: 20px;text-align: center;padding: 0;line-height: 20px;">{{ $cart_count ?? '0' }}</span>
+                                  style="border-radius: 100%;width: 20px;height: 20px;text-align: center;padding: 0;line-height: 20px;">{{ $cart->itemCount() ?? '0' }}</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown mr-2 ">

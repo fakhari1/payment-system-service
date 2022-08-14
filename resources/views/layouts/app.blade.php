@@ -20,6 +20,7 @@
 
 </head>
 <body>
+@inject("cart", "App\Support\Storage\Cart\Cart")
 <div id="app">
     @include('partials.navbar')
 
