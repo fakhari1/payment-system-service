@@ -16,6 +16,15 @@ class CartController extends Controller
         $this->cart = $cart;
     }
 
+    public function index()
+    {
+        $sum = $this->cart->totalPrice();
+        $items = $this->cart->all();
+        $sendCost = 250000;
+
+        return view('cart.items', compact('items', 'sum', 'sendCost'));
+    }
+
     public function increment(Product $product)
     {
         try {

@@ -68,4 +68,30 @@ class Cart
     {
         return $this->storage->count();
     }
+
+    public function get(Product $product)
+    {
+        return $this->storage->get($product->id);
+    }
+
+    public function all()
+    {
+        $products = Product::query()->find(array_keys($this->storage->all()));
+
+        foreach ($products as $key => $product) {
+            $product->quantity = $this->get($product)['quantity'];
+        }
+
+        return $products;
+    }
+
+    public function totalPrice()
+    {
+        $total = 0;
+
+        foreach ($this->all() as $key => $item)
+            $total += $item->price * $item->quantity;
+
+        return $total;
+    }
 }
