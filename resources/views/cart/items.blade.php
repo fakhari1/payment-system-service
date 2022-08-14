@@ -10,8 +10,9 @@
                         <tr>
                             <th scope="col">ردیف</th>
                             <th scope="col">نام محصول</th>
-                            <th scope="col">قیمت محصول</th>
-                            <th scope="col">تعداد</th>
+                            <th scope="col">قابل خرید</th>
+                            <th scope="col" style="width: 110px">قیمت محصول</th>
+                            <th scope="col" style="width: 100px;">تعداد</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -19,12 +20,41 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->title }}</td>
+                                <td>{{ $item->stock }}</td>
                                 <td>
-                                    {{ number_format($item->price / 10) }}
-                                    {{ "تومان" }}
+                                    <div class="d-flex justify-content-between w-100">
+                                        <span>
+                                            {{ number_format($item->price / 10) }}
+                                        </span>
+                                        <span>
+                                            <sub>{{ "تومان" }}</sub>
+                                        </span>
+                                    </div>
                                 </td>
                                 <td>
-                                    {{ $item->quantity }}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <form action="{{ route('cart.update', $item) }}" method="post">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="number"
+                                                   name="quantity"
+                                                   id="quantity"
+                                                   class="form-control form-control-sm"
+                                                   onchange="event.preventDefault(); setTimeout(function () {event.target.parentElement.submit()}, 300)"
+                                                   min="1"
+                                                   max="{{ $item->stock }}"
+                                                   value="{{ $item->quantity }}">
+                                        </form>
+                                        <form action="{{ route('cart.item.delete', $item) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="{{ route('cart.item.delete', $item) }}"
+                                               onclick="event.preventDefault(); event.target.parentElement.parentElement.submit()"
+                                               class="text-danger fw-bold me-3" style="cursor: pointer">
+                                                <i class="fa-light fa-multiply"></i>
+                                            </a>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @empty

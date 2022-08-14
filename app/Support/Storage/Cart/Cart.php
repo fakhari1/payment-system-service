@@ -36,6 +36,13 @@ class Cart
         ]);
     }
 
+    public function destroy(Product $product)
+    {
+        if ($this->storage->exists($product->id)) {
+            $this->storage->unset($product->id);
+        }
+    }
+
     public function decrement(Product $product)
     {
         $quantity = 0;

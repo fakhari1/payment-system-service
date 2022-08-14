@@ -39,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('cart.show');
         Route::get('increment/{product}', [CartController::class, 'increment'])->name('cart.increment');
         Route::get('decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
+
+        Route::patch('update/{product}', [CartController::class, 'update'])->name('cart.update');
+
+        Route::delete('delete/{product}', [CartController::class, 'destroy'])->name('cart.item.delete');
     });
 });
 

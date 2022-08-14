@@ -12,10 +12,17 @@
                             <div class="card-body p-4">
                                 <h5 class="card-title">{{ $product->title }}</h5>
                                 <p class="card-text" style="text-align: justify">{{ $product->description }}</p>
-                                <a href="{{ route('cart.increment', $product) }}" class="btn btn-outline-primary">
-                                    اضافه به سبد خرید
-                                    <i class="fa-light fa-bag-shopping"></i>
-                                </a>
+                                <span class="badge text-danger"
+                                      style="font-size: 1.3rem;">
+                                        {{ number_format($product->price / 10) }}
+                                    {{ "تومان" }}
+                                </span>
+                                <div class="d-flex justify-content-center p-3 align-items-center w-100">
+                                    <a href="{{ route('cart.increment', $product) }}" class="btn btn-outline-primary">
+                                        اضافه به سبد خرید
+                                        <i class="fa-light fa-bag-shopping"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

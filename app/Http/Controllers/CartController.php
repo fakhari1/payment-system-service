@@ -46,4 +46,18 @@ class CartController extends Controller
         return back()->with(['success_msg' => 'تغییرات تعداد در سبد خرید اعمال شد.']);
     }
 
+    public function update(Request $request, Product $product)
+    {
+        $this->cart->update($product, $request->quantity);
+
+        return redirect()->back();
+    }
+
+    public function destroy(Request $request, Product $product)
+    {
+        $this->cart->destroy($product);
+
+        return redirect()->back()->with(['success_msg' => 'محصول از سبد خرید حذف شد.']);
+    }
+
 }
