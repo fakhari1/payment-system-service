@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\QuantityExceedentException;
+use App\Http\Requests\CartCheckoutRequest;
 use App\Models\Product;
 use App\Support\Storage\Cart\Cart;
+use App\Support\Storage\Payment\Transaction;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
     private $cart;
+    private $transaction;
 
-    public function __construct(Cart $cart)
+    public function __construct(Transaction $transaction, Cart $cart)
     {
+        $this->transaction = $transaction;
         $this->cart = $cart;
     }
 
@@ -58,6 +62,23 @@ class CartController extends Controller
         $this->cart->destroy($product);
 
         return redirect()->back()->with(['success_msg' => 'محصول از سبد خرید حذف شد.']);
+    }
+
+    public function checkoutForm()
+    {
+        $sum = $this->cart->totalPrice();
+        $sendCost = 250000;
+
+        return view('cart.checkout', compact('sendCost', 'sum'));
+    }
+
+    public function checkout(CartCheckoutRequest $request)
+    {
+        $order = $this->transaction->checkout($request);
+
+        $message = "سفارش شما با شماره پیگیری {$order->id} پرداخت شد.";
+
+        return redirect()->route('products')->with(['success_msg' => $message]);
     }
 
 }

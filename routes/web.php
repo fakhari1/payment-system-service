@@ -40,6 +40,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('increment/{product}', [CartController::class, 'increment'])->name('cart.increment');
         Route::get('decrement/{product}', [CartController::class, 'decrement'])->name('cart.decrement');
 
+        Route::get('checkout', [CartController::class, 'checkoutForm'])->name('cart.checkout.form');
+        Route::post('checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
         Route::patch('update/{product}', [CartController::class, 'update'])->name('cart.update');
 
         Route::delete('delete/{product}', [CartController::class, 'destroy'])->name('cart.item.delete');

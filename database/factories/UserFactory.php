@@ -20,21 +20,21 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->randomElement([
-                'User 1',
-                'User 6',
-                'User 7',
-                'User 8',
-                'User 9',
-                'User 10',
-                'User 11',
-                'User 12',
-                'User 13',
-                'User 14',
-                'User 15',
-                'User 2',
-                'User 3',
-                'User 4',
-                'User 5'
+                'کاربر 1',
+                'کاربر 6',
+                'کاربر 7',
+                'کاربر 8',
+                'کاربر 9',
+                'کاربر 10',
+                'کاربر 11',
+                'کاربر 12',
+                'کاربر 13',
+                'کاربر 14',
+                'کاربر 15',
+                'کاربر 2',
+                'کاربر 3',
+                'کاربر 4',
+                'کاربر 5'
             ]),
             'email' => fake()->randomElement([
                 'user-1@test.com',

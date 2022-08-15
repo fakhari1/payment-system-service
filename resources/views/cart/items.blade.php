@@ -69,7 +69,7 @@
             <div class="col-md-4">
                 @include('cart.summary')
                 <div class="row px-3 pt-3">
-                    <a href="" class="btn btn-primary">
+                    <a href="{{ route('cart.checkout.form') }}" class="btn btn-primary">
                         ثبت و ادامه سفارش
                     </a>
                 </div>
