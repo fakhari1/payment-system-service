@@ -6,6 +6,9 @@ use App\Http\Requests\CartCheckoutRequest;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Support\Storage\Cart\Cart;
+use App\Support\Storage\Payment\Gateways\Contracts\GatewayContract;
+use App\Support\Storage\Payment\Gateways\Pasargad;
+use App\Support\Storage\Payment\Gateways\Saman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,6 +30,10 @@ class Transaction
         $order = $this->createOrder();
 
         $payment = $this->createPayment($order);
+
+        if ($payment->isOnline) {
+            $response = $this->gatewaysFactory()->pay($order);
+        }
 
         $this->cart->clear();
 
@@ -64,5 +71,22 @@ class Transaction
             'method' => $this->request->type,
             'amount' => $order->amount
         ]);
+    }
+
+    private function gatewaysFactory()
+    {
+        $gateways = [
+            'saman' => Saman::class,
+            'pasargad' => Pasargad::class
+        ][$this->request->gateway];
+
+        return resolve($gateways);
+    }
+
+    public function verify()
+    {
+        $result = $this->gatewaysFactory()->verify($this->request);
+
+        if ($result['status'] === GatewayContract::TRANSACTION_FAILED) return false;
     }
 }

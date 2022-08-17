@@ -74,9 +74,10 @@ class CartController extends Controller
 
     public function checkout(CartCheckoutRequest $request)
     {
+
         $order = $this->transaction->checkout($request);
 
-        $message = "سفارش شما با شماره پیگیری {$order->id} پرداخت شد.";
+        $message = "سفارش شما با شماره پیگیری {$order->id} ثبت شد.";
 
         return redirect()->route('products')->with(['success_msg' => $message]);
     }

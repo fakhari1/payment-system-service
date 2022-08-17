@@ -7,7 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Support\Storage\Contracts\StorageInterface;
-
+use App\Http\Controllers\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +46,11 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('update/{product}', [CartController::class, 'update'])->name('cart.update');
 
         Route::delete('delete/{product}', [CartController::class, 'destroy'])->name('cart.item.delete');
+    });
+
+
+    Route::prefix('payment')->group(function () {
+        Route::post('{gateway}/callback', [PaymentController::class, 'verify'])->name('payment.verify');
     });
 });
 
